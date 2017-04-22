@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :stocks
+
   resources :portfolios
 
   resources :traded_companies
