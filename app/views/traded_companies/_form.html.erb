@@ -1,0 +1,33 @@
+<%= form_for(@traded_company) do |f| %>
+  <% if @traded_company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@traded_company.errors.count, "error") %> prohibited this traded_company from being saved:</h2>
+
+      <ul>
+      <% @traded_company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :current_price %><br>
+    <%= f.number_field :current_price %>
+  </div>
+  <div class="field">
+    <%= f.label :n_stocks %><br>
+    <%= f.number_field :n_stocks %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

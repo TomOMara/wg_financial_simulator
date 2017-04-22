@@ -1,0 +1,2 @@
+module TradedCompaniesHelper
+end

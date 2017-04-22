@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @traded_company.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @traded_company.type %>
+</p>
+
+<p>
+  <strong>Current price:</strong>
+  <%= @traded_company.current_price %>
+</p>
+
+<p>
+  <strong>N stocks:</strong>
+  <%= @traded_company.n_stocks %>
+</p>
+
+<%= link_to 'Edit', edit_traded_company_path(@traded_company) %> |
+<%= link_to 'Back', traded_companies_path %>
