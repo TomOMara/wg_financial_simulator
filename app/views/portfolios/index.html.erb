@@ -1,29 +1,38 @@
-<h1>Listing portfolios</h1>
-
-<table>
+<%- model_class = Portfolio -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Portfolio %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Cash holding</th>
-      <th>Net worth</th>
-      <th>Client</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:cash_holding) %></th>
+      <th><%= model_class.human_attribute_name(:net_worth) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @portfolios.each do |portfolio| %>
       <tr>
+        <td><%= portfolio.id %></td>
         <td><%= portfolio.cash_holding %></td>
         <td><%= portfolio.net_worth %></td>
-        <td><%= portfolio.client %></td>
-        <td><%= link_to 'Show', portfolio %></td>
-        <td><%= link_to 'Edit', edit_portfolio_path(portfolio) %></td>
-        <td><%= link_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l portfolio.created_at, format: :long %></td>
+        <td>
+          <%= link_to portfolio_path(portfolio), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to portfolio_path(portfolio), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Portfolio', new_portfolio_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_portfolio_path,
+            :class => 'btn btn-primary' %>

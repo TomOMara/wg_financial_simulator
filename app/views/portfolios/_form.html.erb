@@ -1,29 +1,22 @@
-<%= form_for(@portfolio) do |f| %>
-  <% if @portfolio.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
-
-      <ul>
-      <% @portfolio.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @portfolio, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  <div class="form-group">
+    <%= f.label :cash_holding, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :cash_holding, :class => 'text-field form-control' %>
     </div>
-  <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :net_worth, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :net_worth, :class => 'text-field form-control' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :cash_holding %><br>
-    <%= f.text_field :cash_holding %>
-  </div>
-  <div class="field">
-    <%= f.label :net_worth %><br>
-    <%= f.text_field :net_worth %>
-  </div>
-  <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.text_field :client_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  portfolios_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

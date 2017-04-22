@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Portfolio -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Portfolio %></h1>
+</div>
 
-<p>
-  <strong>Cash holding:</strong>
-  <%= @portfolio.cash_holding %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:cash_holding) %></dt>
+      <dd><pre class="prettyprint"><%= @portfolio.cash_holding %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:net_worth) %></dt>
+      <dd><pre class="prettyprint"><%= @portfolio.net_worth %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Net worth:</strong>
-  <%= @portfolio.net_worth %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              portfolios_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_portfolio_path(@portfolio), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              portfolio_path(@portfolio),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Client:</strong>
-  <%= @portfolio.client %>
-</p>
-
-<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
-<%= link_to 'Back', portfolios_path %>
