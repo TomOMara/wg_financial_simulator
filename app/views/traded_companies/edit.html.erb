@@ -1,6 +1,5 @@
-<h1>Editing traded_company</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @traded_company %> |
-<%= link_to 'Back', traded_companies_path %>
+<%- model_class = TradedCompany -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => TradedCompany %></h1>
+</div>
+<%= render :partial => 'form' %>

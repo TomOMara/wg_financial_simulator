@@ -1,31 +1,42 @@
-<h1>Listing traded_companies</h1>
-
-<table>
+<%- model_class = TradedCompany -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => TradedCompany %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Current price</th>
-      <th>N stocks</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:type) %></th>
+      <th><%= model_class.human_attribute_name(:current_price) %></th>
+      <th><%= model_class.human_attribute_name(:n_stocks) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @traded_companies.each do |traded_company| %>
       <tr>
+        <td><%= traded_company.id %></td>
         <td><%= traded_company.name %></td>
         <td><%= traded_company.type %></td>
         <td><%= traded_company.current_price %></td>
         <td><%= traded_company.n_stocks %></td>
-        <td><%= link_to 'Show', traded_company %></td>
-        <td><%= link_to 'Edit', edit_traded_company_path(traded_company) %></td>
-        <td><%= link_to 'Destroy', traded_company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l traded_company.created_at, format: :long %></td>
+        <td>
+          <%= link_to traded_company_path(traded_company), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to traded_company_path(traded_company), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Traded company', new_traded_company_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_traded_company_path,
+            :class => 'btn btn-primary' %>
